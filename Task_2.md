@@ -11,9 +11,9 @@
         +------------------------+
         |     Nginx EC2 (Public) |
         |  Public IP             |
-        |  13.63.157.42          |
+        |  13.xx.xx.xx      |
         |  Private IP            |
-        | 10.0.13.193            |
+        | 10.xx.xx.xx           |
         +-----------+------------+
                     │
           Reverse Proxy (HTTP)
@@ -22,7 +22,7 @@
         +------------------------+
         |  Backend EC2 (Private) |
         | Private IP             |
-        | 10.0.15.204            |
+        | xx.xx.xx.xx          |
         | FastAPI :3000          |
         +------------------------+
 ```
