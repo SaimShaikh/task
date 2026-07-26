@@ -219,12 +219,6 @@ The EC2 instance needs an IAM role so the SSM Agent on it can authenticate to th
 7. **Role name:** `EC2-SSM-Role`
 8. Review and click **Create role**
 
-**What this policy allows (high level):**
-
-- `ssm:UpdateInstanceInformation`
-- `ssm:ListAssociations` / `ssm:PutInventory` etc.
-- `ssmmessages:CreateControlChannel`, `ssmmessages:CreateDataChannel`, `ssmmessages:OpenControlChannel`, `ssmmessages:OpenDataChannel`
-- `ec2messages:GetMessages`, `ec2messages:SendReply`, etc.
 
 These are exactly the API calls the SSM Agent makes internally — nothing more.
 
@@ -251,6 +245,11 @@ These are exactly the API calls the SSM Agent makes internally — nothing more.
 9. Click **Launch instance**
 10. Wait until **Instance state = Running** and **Status checks = 2/2 checks passed**
 
+
+<img width="2124" height="1682" alt="image" src="https://github.com/user-attachments/assets/d5069d4b-bb88-4774-bc1e-dcb488460806" />
+<img width="2124" height="1682" alt="image" src="https://github.com/user-attachments/assets/7866fc2f-eb05-4c33-8719-3fa30873b59f" />
+<img width="2034" height="956" alt="image" src="https://github.com/user-attachments/assets/92870a67-cd6f-4dd0-af2f-793a102e25d1" />
+
 ---
 
 ## 8. Step 3: Set Up VPC Interface Endpoints (Required for Private Subnet — No NAT/IGW)
@@ -264,6 +263,9 @@ Do this **before** checking Fleet Manager. Since `ssm-private-subnet` has **no r
 | `com.amazonaws.<region>.ssm` | Core Systems Manager API calls |
 | `com.amazonaws.<region>.ssmmessages` | Session Manager's actual data channel (the shell traffic) |
 | `com.amazonaws.<region>.ec2messages` | Agent-to-service messaging used by SSM |
+
+
+
 
 ### 8.1 Create the Endpoint Security Group
 
@@ -293,6 +295,9 @@ Repeat this three times, once per service name.
 9. Click **Create endpoint**
 10. Repeat for the remaining two service names
 
+
+<img width="3302" height="624" alt="image" src="https://github.com/user-attachments/assets/9d781e13-bdc7-4117-9527-a0d75176d44d" />
+
 > Wait until all three endpoints show **Status: Available** (takes 1–3 minutes each) before proceeding to Step 4.
 
 ### 8.3 Confirm DNS Resolution Is Enabled
@@ -318,7 +323,10 @@ Amazon Linux 2023, Amazon Linux 2, and Ubuntu 20.04+ AMIs from AWS come with the
 2. Look for `ssm-private-instance` in the managed instances list
 3. **Ping status** should show **Online** (allow 1–2 minutes after endpoints become Available)
 
-> If it's still not appearing after a few minutes, that's now a real issue, not an expected wait — check the **Troubleshooting Checklist** section.
+<img width="3210" height="1185" alt="image" src="https://github.com/user-attachments/assets/2937d71f-61ca-424c-a4ec-21eeeeb31313" />
+
+
+> If it's still not appearing after a few minutes, that's now a real issue, not an expected wait
 
 ### 9.2 (If Needed) Manually Verify/Install/Restart the Agent on the Instance Itself
 
@@ -380,6 +388,8 @@ Now the actual login.
 4. In the **Connect to instance** page, select the **Session Manager** tab
 5. You should see: *"Amazon EC2 Instance Connect and Session Manager"* with your instance listed and eligible
 6. Click **Connect**
+<img width="2" height="2" alt="image" src="https://github.com/user-attachments/assets/1795f5a5-9548-45cd-8403-57fed1336617" />
+<img width="3312" height="979" alt="image" src="https://github.com/user-attachments/assets/55e6093e-b79a-44b6-8a82-1eccb996c12a" />
 
 A new browser tab opens with a **black terminal window** — you are now inside the private EC2 instance's shell, with:
 
