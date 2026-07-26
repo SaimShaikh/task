@@ -82,7 +82,7 @@ sudo systemctl status nginx
 
 ---
 
-# Step 2 - Connect to the Backend Server and Verify Backend Connectivity
+# Step 2 - Connect to Setup the Backend Server and Verify Backend Connectivity
 
 Step 1. Install Python
 ```bash
@@ -138,7 +138,6 @@ Expected Output
 }
 ```
 
-If this works, networking between both EC2 instances is correct.
 
 
 ## Create a Production Service
@@ -175,7 +174,7 @@ sudo systemctl start backend
 `sudo ss -tulnp | grep 3000`
 ---
 
-# Step 3 - Configure Nginx Reverse Proxy
+# Step 3 - In Nginx Ec2 Configure Nginx Reverse Proxy
 
 Edit the default configuration.
 
@@ -192,7 +191,7 @@ server {
 
     location / {
 
-        proxy_pass http://10.0.15.204:3000;
+        proxy_pass http://priavte server ip:3000;
 
         proxy_http_version 1.1;
 
@@ -250,7 +249,7 @@ Expected Output
 Now open in browser
 
 ```
-http://13.63.157.42
+http://Nginx Server Public IP
 ```
 
 You should see
@@ -258,7 +257,7 @@ You should see
 ```json
 {
   "message":"Hello from Backend Server",
-  "server":"10.0.15.204"
+  "server":"Priavte Server IP"
 }
 ```
 
@@ -302,23 +301,14 @@ During certificate generation
 
 ```
 Country Name: IN
-State: Karnataka
-Locality: Bangalore
+State: <YOUR STATTE 
+Locality: <Add >
 Organization: Demo
 Organizational Unit: IT
-Common Name: 13.63.157.42
+Common Name: Nginx Server Public IP
 Email Address: (optional)
 ```
 
-You can also generate it without prompts.
-
-```bash
-sudo openssl req -x509 -nodes -days 365 \
--newkey rsa:2048 \
--keyout /etc/nginx/ssl/nginx.key \
--out /etc/nginx/ssl/nginx.crt \
--subj "/C=IN/ST=Karnataka/L=Bangalore/O=Demo/OU=IT/CN=13.63.157.42"
-```
 
 ---
 
@@ -353,7 +343,7 @@ server {
 
     location / {
 
-        proxy_pass http://10.0.15.204:3000;
+        proxy_pass http://Backend Server Priavte IP :3000;
 
         proxy_http_version 1.1;
 
@@ -396,7 +386,7 @@ sudo systemctl reload nginx
 Browser
 
 ```
-https://13.63.157.42
+https://Nginx Server IP 
 ```
 
 Browser Warning
@@ -411,17 +401,20 @@ Click
 Advanced
 ↓
 
-Proceed to 13.63.157.42 (unsafe)
+Proceed to (unsafe)
 ```
+<img width="6" height="6" alt="image" src="https://github.com/user-attachments/assets/feb6f771-b4ed-4991-8e79-5ca4b1c3f23e" />
+
 
 Expected Output
 
 ```json
 {
   "message":"Hello from Backend Server",
-  "server":"10.0.15.204"
+  "server":"Backend Server Private IP "
 }
 ```
+<img width="3005" height="1688" alt="image" src="https://github.com/user-attachments/assets/32e63083-9c4d-478d-801d-23e24ab5119b" />
 
 ---
 
@@ -442,7 +435,7 @@ sudo ss -tulnp | grep nginx
 Backend Connectivity
 
 ```bash
-curl http://10.0.15.204:3000
+curl http://Backend Server IP:3000
 ```
 
 Local Reverse Proxy Test
@@ -516,7 +509,7 @@ sudo nginx -t
 ### Backend not reachable
 
 ```bash
-curl http://10.0.15.204:3000
+curl http://Backend Server Private IP :3000
 ```
 
 ---
