@@ -322,6 +322,7 @@ Amazon Linux 2023, Amazon Linux 2, and Ubuntu 20.04+ AMIs from AWS come with the
 1. Go to **Systems Manager console** → left sidebar → **Fleet Manager** (under Node Management)
 2. Look for `ssm-private-instance` in the managed instances list
 3. **Ping status** should show **Online** (allow 1–2 minutes after endpoints become Available)
+<img width="3211" height="1961" alt="image" src="https://github.com/user-attachments/assets/686d4597-9558-45a9-9c4c-6e4d1480d093" />
 
 <img width="3210" height="1185" alt="image" src="https://github.com/user-attachments/assets/2937d71f-61ca-424c-a4ec-21eeeeb31313" />
 
