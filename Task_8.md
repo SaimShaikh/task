@@ -74,20 +74,22 @@ Confirm the AWS Region (example: ap-south-1).
 
 1.  AWS Console → **Key Management Service (KMS)**.
 2.  Select **Customer managed keys**.
-3.  Click **Create key**.
-4.  Choose:
+3.  <img width="2780" height="1309" alt="image" src="https://github.com/user-attachments/assets/022d1a9a-5e0f-4ae5-b6d1-9e2cacd4b884" />
+
+4.  Click **Create key**.
+5.  Choose:
     -   Key Type: **Symmetric**
     -   Key Usage: **Encrypt and Decrypt**
-5.  Click **Next**.
-6.  Configure:
+6.  Click **Next**.
+7.  Configure:
     -   Alias: `ebs-prod-key`
     -   Description: Customer Managed Key for EBS Encryption.
-7.  Select **Key Administrators**.
-8.  Select **Key Users**.
-9.  Review the key policy.
-10. Click **Finish**.
-11. Open the key and enable **Automatic Key Rotation**.
-12. Verify the key state is **Enabled**.
+8.  Select **Key Administrators**.
+9.  Select **Key Users**.
+10.  Review the key policy.
+11. Click **Finish**.
+12. Open the key and enable **Automatic Key Rotation**.
+13. Verify the key state is **Enabled**.
 
 ## AWS Managed Key vs Customer Managed Key
 
@@ -114,6 +116,9 @@ Confirm the AWS Region (example: ap-south-1).
     -   Volume Type: gp3
     -   Enable **Encrypted**
     -   Select KMS Key: `alias/ebs-prod-key`
+  
+<img width="2157" height="1036" alt="image" src="https://github.com/user-attachments/assets/fbd44745-9ec7-4e99-bd08-44794340efb0" />
+
 6.  Launch the instance.
 
 ------------------------------------------------------------------------
@@ -128,6 +133,7 @@ Verify:
 
 -   Encrypted = Yes
 -   KMS Key = alias/ebs-prod-key
+<img width="3212" height="1829" alt="image" src="https://github.com/user-attachments/assets/b38b0464-c473-41e2-89a4-2162d0f1b3d8" />
 
 ## AWS CLI
 
@@ -152,6 +158,7 @@ Expected output:
 ``` text
 true
 ```
+<img width="3285" height="1332" alt="Screenshot 2026-07-27 at 11 39 46 AM" src="https://github.com/user-attachments/assets/aa7bf55e-dc9b-4082-a46d-6c5b38e7d14d" />
 
 Verify KMS Key:
 
